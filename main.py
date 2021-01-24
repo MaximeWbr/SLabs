@@ -8,6 +8,8 @@ if choise == "1" or choise == "Toulouse":
 	print("You have chosen Toulouse.\n")
 	# Get the corresponding data bases
 	toulouseDB = DataBase("Toulouse", TOULOUSE_URL_LIST, TOULOUSE_NAME_LSIT)
+	data = toulouseDB._getData("./data/Toulouse/Teso.csv")
+
 	# Read the data bases
 	# Generate the website
 		# Once created ask to visit it
