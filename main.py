@@ -1,6 +1,6 @@
 from src.DataBase import *
 from src.config import *
-#List of URL for the city
+from src.Visualization import *
 
 print("Welcome, Choose your city:\n(1) Toulouse\n")
 choise = input('Enter your answer: ')
@@ -15,6 +15,9 @@ if choise == "1" or choise == "Toulouse":
 	# Show on the website
 		# City's data
 			#Plot data
+	visu = Visualization()
+	#visu._plotData(toulouseDB.listeName[0], data)
+
 		# Ask for action (compare with Air Quality, Update)
 else:
 	print("Error: Wrong answer, code exit.")

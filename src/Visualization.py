@@ -2,9 +2,7 @@ import matplotlib.pyplot as plt
 
 class Visualization():
 
-	def __init__(self):
-
-	def _plot(self, name, data):
+	def _plotData(self, name, data):
 		plt.plot(data)
 		plt.ylabel(name)
 		plt.show()
