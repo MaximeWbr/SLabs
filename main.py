@@ -8,13 +8,13 @@ if choise == "1" or choise == "Toulouse":
 	print("You have chosen Toulouse.\n")
 	# Get the corresponding data bases
 	toulouseDB = DataBase("Toulouse", TOULOUSE_URL_LIST, TOULOUSE_NAME_LSIT)
-	data = toulouseDB._getData("./data/Toulouse/Teso.csv")
-
 	# Read the data bases
+	data = toulouseDB._getData("./data/Toulouse/Teso.csv")
 	# Generate the website
 		# Once created ask to visit it
 	# Show on the website
 		# City's data
+			#Plot data
 		# Ask for action (compare with Air Quality, Update)
 else:
 	print("Error: Wrong answer, code exit.")
