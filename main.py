@@ -9,7 +9,8 @@ if choise == "1" or choise == "Toulouse":
 	# Get the corresponding data bases
 	toulouseDB = DataBase("Toulouse", TOULOUSE_URL_LIST, TOULOUSE_NAME_LSIT)
 	# Read the data bases
-	data = toulouseDB._getData("./data/Toulouse/Teso.csv")
+	toulouseDB._getData("./data/Toulouse/Teso.csv")
+	data = toulouseDB._getSpecificData("numero_de_message")
 	# Generate the website
 		# Once created ask to visit it
 	# Show on the website
