@@ -6,7 +6,7 @@ Exercices: Data ingestion and vizualisation
 
 ### Pré-requis
 
-- Téléchargez Git (https://git-scm.com/downloads) et Python3(https://www.python.org/downloads/) sur votre machine.
+- Téléchargez [Git](https://git-scm.com/downloads) et [Python3](https://www.python.org/downloads/) sur votre machine.
 - Installez pip3 et mettre à jour avec ``pip3 install --upgrade pip`` (version testée 21.0)
 - Installez matplotlib ``pip3 install matplotlib `` et mettre à jour avec ``pip3 install --upgrade matplotlib`` 
 
