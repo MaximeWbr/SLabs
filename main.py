@@ -24,8 +24,8 @@ if choise == "1" or choise == "Toulouse":
 		# City's data
 			#Plot data
 	visu = Visualization()
-	visu._plotData("temperature_partie_decimale", data, 20)
-	visu._plotCompare("temperature_partie_decimale", data, "temperature_partie_decimale", data, 20)
+	name1 = visu._plotData("temperature_partie_decimale", data, 20)
+	name2 = visu._plotCompare("temperature_partie_decimale", data, "temperature_partie_decimale", data, 20)
 
 		# Ask for action (compare with Air Quality, Update)
 else:
