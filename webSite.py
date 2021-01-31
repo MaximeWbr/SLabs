@@ -36,20 +36,21 @@ def home():
 def image():
 	if request.method == 'POST':
 		result = request.form
-		print(result)
+		city = request.form["city"]
+		label = request.form["data"]
+		s_number = int(request.form["sample_number"])
 
-	#CCreate folder for data base
+	# Create folder for data base
 	output_dir = TOULOUSE_PATH_DB
 	mkdir_p(output_dir)
 	# Get the corresponding data bases
-	toulouseDB = DataBase("Toulouse", TOULOUSE_URL_LIST, TOULOUSE_NAME_LSIT)
+	toulouseDB = DataBase(city, TOULOUSE_URL_LIST, TOULOUSE_NAME_LSIT)
 	# Read the data bases
 	toulouseDB._getData(output_dir+"Teso.csv")
-	data = toulouseDB._getSpecificData("temperature_partie_decimale")
+	data = toulouseDB._getSpecificData(label) #temperature_partie_decimale
 	# Plot data
 	visu = Visualization()
-	figName = visu._plotData("temperature_partie_decimale", data, 100)
-
+	figName = visu._plotData(label, data, s_number)
 	return render_template('plot.html', image_path =figName)
 
 # #Crée une page et remplace content par name
