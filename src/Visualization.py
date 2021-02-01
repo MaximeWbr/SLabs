@@ -48,7 +48,7 @@ class Visualization():
 		x1 = np.linspace(min(tmpData1),max(tmpData1),len(tmpData1))
 		x2 = np.linspace(min(tmpData2),max(tmpData2),len(tmpData2))
 		plt.plot(x1, tmpData1, 'b', x2, tmpData2, 'r')
-		#Crée le chemin
+		#Create path for figure
 		output_dir = TOULOUSE_PATH_GRAPH 
 		mkdir_p(output_dir)
 		#Save the figure
