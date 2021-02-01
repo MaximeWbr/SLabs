@@ -1,32 +1,12 @@
 <html>
 	<body>
 		<h1>Home Page</h1>
-		<form action = "http://localhost:5000/plot" method = "POST">
+		<form action = "http://localhost:5000/paramSingle" method = "POST">
+		<p><input type = "submit" value = "Plot one single data" /></p>
+		</form>
 
-		<label for="city-select">Choose your city:</label>
-
-		<select name="city" id="city">
-			<option value="">--Please choose an option--</option>
-			<option value="Toulouse">Toulouse</option>
-		</select>
-
-		<p>Sample_number<input type = "text" name = "sample_number" /></p>
-		
-		<label for="data-select">Choose your data:</label>
-		<select name="data" id="label">
-			<option value="">--Please choose an option--</option>
-			<option value="temperature_partie_decimale">temperature_partie_decimale</option>
-			<option value="pression">pression</option>
-			<option value="humidite">humidite</option>
-			<option value="pluie_en_augets">pluie_en_augets</option>
-			<option value="pluie_la_plus_intense_durant_1_min">pluie_la_plus_intense_durant_1_min</option>
-			<option value="force_rafale_max">force_rafale_max</option>
-			<option value="force_moyenne_du_vecteur_de_vent">force_moyenne_du_vecteur_de_vent</option>
-			<option value="force_moyenne_du_vecteur_de_vent">force_moyenne_du_vecteur_de_vent</option>
-			<option value="force_du_vecteur_de_vent_max">force_du_vecteur_de_vent_max</option>
-		</select>
-
-		<p><input type = "submit" value = "submit" /></p>
+		<form action = "http://localhost:5000/paramCompare" method = "POST">
+		<p><input type = "submit" value = "Plot and compare" /></p>
 		</form>
 	</body>
 </html>

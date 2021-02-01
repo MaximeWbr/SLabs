@@ -47,16 +47,17 @@ class Visualization():
 		#Scale x1 and x2
 		x1 = np.linspace(min(tmpData1),max(tmpData1),len(tmpData1))
 		x2 = np.linspace(min(tmpData2),max(tmpData2),len(tmpData2))
+		plt.switch_backend('Agg') #matplotlib set the backend to a non-interactive one in order to the server does not try to create (and then destroy) GUI windows that will never be seen.
 		plt.plot(x1, tmpData1, 'b', x2, tmpData2, 'r')
 		#Create path for figure
 		output_dir = TOULOUSE_PATH_GRAPH 
 		mkdir_p(output_dir)
 		#Save the figure
-		label = "{}/"+name1 + "_compare_to_" + name2
-		figureName = label+".png"
+		label =name1 + "_compare_to_" + name2
+		figureName = output_dir+label+".png"
 		plt.suptitle(label)
-		plt.savefig(figureName.format(output_dir))
-		return name1 + "_compare_to_" + name2
+		plt.savefig(figureName)
+		return name1 + "_compare_to_" + name2+".png"
 		#plt.show()
 
 
