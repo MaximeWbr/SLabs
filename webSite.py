@@ -15,23 +15,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def home():
 	return render_template('param.html')
 
-# #Crée une page user qui affiche le paramètre name
-# @app.route("/<name>")
-# def user(name):
-# 	return f"hello {name}!"
-
-# #Génère un simple plot
-# @app.route("/generate")
-# def generate():
-# 	my_path = "../data/graphs/"+figPath 
-# 	return	my_path
-# 	#return redirect(url_for("plot", path=my_path))
-
-# #Crée avec la page admin, redirige vers la page user avec comme input Admin!
-# @app.route("/admin")
-# def admin():
-# 	return redirect(url_for("user", name="Admin!"))
-
+#Plot page
 @app.route('/plot', methods=['POST', 'GET'])
 def image():
 	if request.method == 'POST':
@@ -44,20 +28,16 @@ def image():
 	output_dir = TOULOUSE_PATH_DB
 	mkdir_p(output_dir)
 	# Get the corresponding data bases
-	toulouseDB = DataBase(city, TOULOUSE_URL_LIST, TOULOUSE_NAME_LSIT)
+	toulouseDB = DataBase(city, TOULOUSE_URL_LIST, TOULOUSE_NAME_LSIT,0)
 	# Read the data bases
 	toulouseDB._getData(output_dir+"Teso.csv")
+	print(toulouseDB.listeLabel)
 	data = toulouseDB._getSpecificData(label) #temperature_partie_decimale
 	# Plot data
 	visu = Visualization()
 	figName = visu._plotData(label, data, s_number)
 	return render_template('plot.html', image_path =figName)
 
-# #Crée une page et remplace content par name
-# @app.route("/<name>")
-# def home(name):
-# 	#Affiche le fichier html
-# 	return render_template("index.html", content=name)
 
 if __name__ == "__main__":
 	app.run()
