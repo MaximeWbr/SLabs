@@ -14,7 +14,7 @@ Exercise: Ingestion and Visualization of data
 ### Installation
 
 Create a Workspace folder at the desired location.
-Run the following command in your Workspace ``my_commande`` to clone the git.
+Run the following command in your Workspace ``git clone https://github.com/MaximeWbr/SLabs.git`` to clone the git.
 
 ## Get started
 
