@@ -3,16 +3,17 @@ import csv
 
 class DataBase():
 
-	def __init__(self, name, listeURL, listeName):
+	def __init__(self, name, listeURL, listeName, flag):
 		self.name = "name"
 		self.data = []
 		self.listeName = listeName
 		self.listeLabel = []
 		#Download all the dataBase
-		#for i in range(0, len(listeURL)):
-		#	url = listeURL[i]
-		#	r = requests.get(url, allow_redirects=True)
-		#	open(listeName[i], 'wb').write(r.content)
+		if(flag):
+			for i in range(0, len(listeURL)):
+				url = listeURL[i]
+				r = requests.get(url, allow_redirects=True)
+				open(listeName[i], 'wb').write(r.content)
 
 	# Description: Get the data of the DB and save raw information into self.data (str list)
 	# Input: name: (str) the name of the data base
