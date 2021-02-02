@@ -21,14 +21,13 @@ class Visualization():
 		for i in range(num):
 			tmpData.append(data[num-(i+1)])
 		#Scale x
-		x = np.linspace(min(tmpData),max(tmpData),len(tmpData))
+		x = np.linspace(1,num,num)
 		plt.switch_backend('Agg') #matplotlib set the backend to a non-interactive one in order to the server does not try to create (and then destroy) GUI windows that will never be seen.
 		plt.plot(x,tmpData)
 
 		plt.ylabel(name)
 		plt.savefig(figureName)
 		return name+".png"
-		#plt.show()
 
 	# Description: Plot two datas to compare them on the same plot
 	# Input: name1: (str) the first label name of the data
@@ -44,11 +43,13 @@ class Visualization():
 		for i in range(num):
 			tmpData1.append(data1[num-(i+1)])
 			tmpData2.append(data2[num-(i+1)])
+		normData1 = [float(i)/max(tmpData1) for i in tmpData1]
+		normData2 = [float(j)/max(tmpData2) for j in tmpData2]
 		#Scale x1 and x2
-		x1 = np.linspace(min(tmpData1),max(tmpData1),len(tmpData1))
-		x2 = np.linspace(min(tmpData2),max(tmpData2),len(tmpData2))
+		x1 = np.linspace(1,num,num)
+		x2 = np.linspace(1,num,num)
 		plt.switch_backend('Agg') #matplotlib set the backend to a non-interactive one in order to the server does not try to create (and then destroy) GUI windows that will never be seen.
-		plt.plot(x1, tmpData1, 'b', x2, tmpData2, 'r')
+		plt.plot(x1, normData1, 'b', x2, normData2, 'r')
 		#Create path for figure
 		output_dir = TOULOUSE_PATH_GRAPH 
 		mkdir_p(output_dir)
@@ -58,7 +59,7 @@ class Visualization():
 		plt.suptitle(label)
 		plt.savefig(figureName)
 		return name1 + "_compare_to_" + name2+".png"
-		#plt.show()
+
 
 
 
