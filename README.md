@@ -2,25 +2,25 @@
 
 ## Description
 
-Exercices: Data ingestion and vizualisation
+Exercise: Ingestion and Visualization of data
 
-### Pré-requis
+### Prerequisites
 
-- Téléchargez Git (https://git-scm.com/downloads) et Python3(https://www.python.org/downloads/) sur votre machine.
-- Installez pip3 et mettre à jour avec ``pip3 install --upgrade pip`` (version testée 21.0)
-- Installez matplotlib ``pip3 install matplotlib `` et mettre à jour avec ``pip3 install --upgrade matplotlib`` 
+- Download [Git](https://git-scm.com/downloads) and [Python3](https://www.python.org/downloads/).
+- Install pip3 and update with ``pip3 install --upgrade pip`` (used version 21.0)
+- Download matplotlib ``pip3 install matplotlib `` and update it with ``pip3 install --upgrade matplotlib`` 
 - Installez Flask ``pip3 install flask``
 
 ### Installation
 
-Créez un Workspace à l'endroit désiré.
-Executez dasn le Workspace la commande ``my_commande`` afin de cloner le projet.
+Create a Workspace folder at the desired location.
+Run the following command in your Workspace ``git clone https://github.com/MaximeWbr/SLabs.git`` to clone the git.
 
-## Démarrage
+## Get started
 
-Allez à la racine du projet et lancé la commande `` my_commande``
 
-## Outils recommandés
+
+## Recommended tools
 * [SublimText](https://www.sublimetext.com/) - Free text editor
 * [GitKraken](https://www.gitkraken.com/) - Free Git GUI
 
@@ -30,10 +30,10 @@ None
 ## Versions
 None
 
-## Auteurs
+## Authors
 * **Maxime Weber** 
 
 
-## License
+## Licence
 None
 
