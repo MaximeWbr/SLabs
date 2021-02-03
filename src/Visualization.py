@@ -24,8 +24,9 @@ class Visualization():
 		x = np.linspace(1,num,num)
 		plt.switch_backend('Agg') #matplotlib set the backend to a non-interactive one in order to the server does not try to create (and then destroy) GUI windows that will never be seen.
 		plt.plot(x,tmpData)
-
+		plt.suptitle("Representation of the '"+ name +"' for the "+ str(num) +" last times")
 		plt.ylabel(name)
+		plt.xlabel("The "+ str(num) + " last data received")
 		plt.savefig(figureName)
 		return name+".png"
 
@@ -43,8 +44,14 @@ class Visualization():
 		for i in range(num):
 			tmpData1.append(data1[num-(i+1)])
 			tmpData2.append(data2[num-(i+1)])
-		normData1 = [float(i)/max(tmpData1) for i in tmpData1]
-		normData2 = [float(j)/max(tmpData2) for j in tmpData2]
+		if max(tmpData1) != 0:
+			normData1 = [float(i)/max(tmpData1) for i in tmpData1]
+		else:
+			normData1 = tmpData1
+		if max(tmpData2) != 0:
+			normData2 = [float(j)/max(tmpData2) for j in tmpData2]
+		else:
+			normData2 = tmpData2
 		#Scale x1 and x2
 		x1 = np.linspace(1,num,num)
 		x2 = np.linspace(1,num,num)
@@ -56,9 +63,16 @@ class Visualization():
 		#Save the figure
 		label =name1 + "_compare_to_" + name2
 		figureName = output_dir+label+".png"
-		plt.suptitle(label)
+		if name2 == "valeur":
+			plotName = "Air Quality"
+		else:
+			plotName = name2
+		plt.suptitle("Compare '"+ name1 +"' to '"+ plotName +"' for the "+ str(num) +" last times")
+		plt.ylabel("Normalzed data")
+		plt.xlabel("The "+ str(num) +" last data received")
+		plt.legend((name1, plotName), loc='upper right')
 		plt.savefig(figureName)
-		return name1 + "_compare_to_" + name2+".png"
+		return name1 + "_compare_to_" + name2 +".png"
 
 
 
