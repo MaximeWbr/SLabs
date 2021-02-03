@@ -1,16 +1,75 @@
+
+
 <html>
+	<head>
+		<meta charset="utf-8" />
+		<style type="text/css">
+			body
+			{
+				margin: 10px 0 ;
+				padding: 0 ;
+				text-align: center ;
+			}
+				
+			div#conteneur
+			{
+				width: 770px ;
+				margin: 0 auto ;
+				text-align: left ;
+			}
+
+			h1#header
+			{
+				color: rgb(61, 31, 228) ;
+			}
+
+			p#contenu
+			{
+				border:1px dotted rgb(61, 31, 228);
+			}
+			
+			ul#menu
+			{
+				height: 95px ;
+				margin: 0 ;
+				padding: 0 ;
+				background: rgb(61, 31, 228);
+				list-style-type: none ;
+				text-align: center ;
+				display: block ;
+			}
+
+			p#footer
+			{
+				margin: 0 ;
+				padding-right: 10px ;
+				line-height: 30px ;
+				text-align: right ;
+			}
+		</style>
+	</head>
 	<body>
-		<h1>Home Page</h1>
-		<form action = "http://localhost:5000/paramSingle" method = "POST">
-		<p><input type = "submit" value = "Plot one single data" /></p>
-		</form>
+		<div id="conteneur"> 
+			<h1 id="header">Stack Labs Weather Page</h1>
+			<h1 >Home Page</h1>
+			<nav>
+				<ul id="menu">
+					<form action = "http://localhost:5000/paramSingle" method = "POST">
+						<p><input type = "submit" value = "Plot one single data" /></p>
+					</form>
 
-		<form action = "http://localhost:5000/paramCompare" method = "POST">
-		<p><input type = "submit" value = "Plot and compare between weather stations" /></p>
-		</form>
+					<form action = "http://localhost:5000/paramCompare" method = "POST">
+						<p><input type = "submit" value = "Plot and compare between weather stations" /></p>
+					</form>
 
-		<form action = "http://localhost:5000/paramCompareAirQuality" method = "POST">
-		<p><input type = "submit" value = "Plot and compare with Air Quality" /></p>
-		</form>
+					<form action = "http://localhost:5000/paramCompareAirQuality" method = "POST">
+						<p><input type = "submit" value = "Plot and compare with Air Quality" /></p>
+					</form>
+				</ul>
+			</nav>
+			<h2>Description</h2>
+			<p id="contenu"> Here description</p>
+			<p id="footer">Made in HTML/CSS, Back end in Python3</p>
+		</div>
 	</body>
 </html>

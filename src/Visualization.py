@@ -68,7 +68,7 @@ class Visualization():
 		else:
 			plotName = name2
 		plt.suptitle("Compare '"+ name1 +"' to '"+ plotName +"' for the "+ str(num) +" last times")
-		plt.ylabel("Normalzed data")
+		plt.ylabel("Normalized data")
 		plt.xlabel("The "+ str(num) +" last data received")
 		plt.legend((name1, plotName), loc='upper right')
 		plt.savefig(figureName)
