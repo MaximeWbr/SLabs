@@ -17,6 +17,9 @@ class Visualization():
 		#Save the figure
 		figureName = output_dir+name+".png"
 		tmpData = []
+		#Safety take the max of available data
+		if len(data)<num:
+			num = len(data)
 		#Get the num last values of data
 		for i in range(num):
 			tmpData.append(data[num-(i+1)])
@@ -40,6 +43,11 @@ class Visualization():
 	def _plotCompare(self, name1, data1, name2, data2, num):
 		tmpData1 = []
 		tmpData2 = []
+		#Safety take the max of available data
+		if len(data1)<num:
+			num = len(data1)
+		if len(data2)<num:
+			num = len(data2)
 		#Get the num last values of the data1 and data2
 		for i in range(num):
 			tmpData1.append(data1[num-(i+1)])
