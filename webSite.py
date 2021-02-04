@@ -37,6 +37,10 @@ def image():
 		label = request.form["data"]
 		s_number = int(request.form["sample_number"])
 
+	# Check the value of sample number
+	if s_number < 0:
+		return render_template('paramSingleAlerte.html')
+
 	if city == "Toulouse":
 		output_dir = TOULOUSE_PATH_DB
 		urlList = TOULOUSE_URL_LIST
@@ -76,7 +80,11 @@ def imageCompare():
 		s_number = int(request.form["sample_number"])
 		city2 = request.form["city2"]
 		label2 = request.form["data2"]
-		
+
+	# Check the value of sample number
+	if s_number < 0:
+		return render_template('paramCompareAlerte.html')
+
 	if city1 == "Toulouse":
 		output_dir1 = TOULOUSE_PATH_DB
 		urlList1 = TOULOUSE_URL_LIST
@@ -129,7 +137,11 @@ def imageAirCompare():
 		s_number = int(request.form["sample_number"])
 		city2 = request.form["city2"]
 		label2 = "valeur"
-		
+
+	# Check the value of sample number
+	if s_number < 0:
+		return render_template('paramCompareAirQualityAlerte.html')
+
 	if city1 == "Toulouse":
 		output_dir1 = TOULOUSE_PATH_DB
 		urlList1 = TOULOUSE_URL_LIST

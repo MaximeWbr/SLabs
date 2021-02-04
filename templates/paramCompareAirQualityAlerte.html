@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style type="text/css">
+		<link rel="stylesheet" href="style.css" />
+			h1#header
+			{
+				color: rgb(61, 31, 228) ;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 id="header">Settings to compare with the air quality</h1>
+		<form action = "http://localhost:5000/plotCompareAirQuality" method = "POST">
+
+		<label for="city-select">Choose your city:</label>
+		<select name="city" id="city">
+			<option value="">--Please choose an option--</option>
+			<option value="Toulouse">Toulouse</option>
+		</select>
+
+		<p><label for="data-select">Choose your data:</label></p>
+		<p><select name="data" id="label">
+			<option value="">--Please choose an option--</option>
+			<option value="temperature_partie_decimale">temperature_partie_decimale</option>
+			<option value="pression">pression</option>
+			<option value="humidite">humidite</option>
+			<option value="pluie_en_augets">pluie_en_augets</option>
+			<option value="pluie_la_plus_intense_durant_1_min">pluie_la_plus_intense_durant_1_min</option>
+			<option value="force_rafale_max">force_rafale_max</option>
+			<option value="force_moyenne_du_vecteur_de_vent">force_moyenne_du_vecteur_de_vent</option>
+			<option value="force_moyenne_du_vecteur_de_vent">force_moyenne_du_vecteur_de_vent</option>
+			<option value="force_du_vecteur_de_vent_max">force_du_vecteur_de_vent_max</option>
+		</select></p>
+
+		<label for="city-select2">Choose your air quality data base:</label><
+		<select name="city2" id="city2">
+			<option value="">--Please choose an option--</option>
+			<option value="Air_Quality">Air_Quality</option>
+		</select>
+		
+		<p>Sample_number<input type = "text" name = "sample_number" /></p>
+
+		<p><input type = "submit" value = "submit" /></p>
+		</form>
+		<p style="color: red;"> Error number of sample: please choose a positif number!</p>
+		<form action = "http://localhost:5000/" method = "POST">
+			<p><input type = "submit" value = "Back" /></p>
+		</form>
+	</body>
+</html>
