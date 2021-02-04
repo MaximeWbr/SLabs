@@ -5,9 +5,7 @@ from src.Visualization import *
 from src.mkdirPath import *
 import matplotlib.pyplot as plt
 import os
-
-#Global Variable to allow the DB update
-UPDATE_DB = 0
+from datetime import timedelta
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -49,6 +47,15 @@ def image():
 		nameList = AIR_NAME
 	# Create folder for data base
 	mkdir_p(output_dir)
+	# Check time to download the new DB or not, update every 15min (Weather DB)
+	yearTime = timedelta(days=365)
+	yearTime.total_seconds()
+	global TIME
+	if (yearTime.total_seconds() < TIME+(15*60)):
+		UPDATE_DB = 0
+	else:
+		UPDATE_DB = 1
+		TIME = yearTime.total_seconds()
 	# Get the corresponding data bases
 	toulouseDB = DataBase(city, urlList, nameList,UPDATE_DB)
 	# Read the data bases
@@ -90,6 +97,15 @@ def imageCompare():
 	# Create folder for data base
 	mkdir_p(output_dir1)
 	mkdir_p(output_dir2)
+	# Check time to download the new DB or not, update every 15min (Weather DB)
+	yearTime = timedelta(days=365)
+	yearTime.total_seconds()
+	global TIME
+	if (yearTime.total_seconds() < TIME+(15*60)):
+		UPDATE_DB = 0
+	else:
+		UPDATE_DB = 1
+		TIME = yearTime.total_seconds()
 	# Get the corresponding data bases
 	dataBase1 = DataBase(city1, urlList1, nameList1, UPDATE_DB)
 	dataBase2 = DataBase(city2, urlList2, nameList2, UPDATE_DB)
@@ -129,6 +145,17 @@ def imageAirCompare():
 	# Create folder for data base
 	mkdir_p(output_dir1)
 	mkdir_p(output_dir2)
+	# Check time to download the new DB or not, update every 9min (Air Quality BD)
+	yearTime = timedelta(days=365)
+	yearTime.total_seconds()
+	global TIME_AIR
+	global TIME
+	if ((yearTime.total_seconds() < TIME_AIR+(9*60)) or (yearTime.total_seconds() < TIME+(15*60))):
+		UPDATE_DB = 0
+	else:
+		UPDATE_DB = 1
+		TIME_AIR = yearTime.total_seconds()
+		TIME = yearTime.total_seconds()
 	# Get the corresponding data bases
 	dataBase1 = DataBase(city1, urlList1, nameList1, UPDATE_DB)
 	dataBase2 = DataBase(city2, urlList2, nameList2, UPDATE_DB)

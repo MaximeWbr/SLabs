@@ -5,3 +5,8 @@ AIR_PATH_DB = './data/'
 TOULOUSE_PATH_GRAPH = "static/images/"
 TOULOUSE_NAME_LSIT= ['./data/Toulouse/Teso.csv']
 AIR_NAME= ['./data/AirQuality.csv']
+
+#Global Variable to allow the DB update
+UPDATE_DB = 0
+TIME = 0
+TIME_AIR = 0
