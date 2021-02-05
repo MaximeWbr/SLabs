@@ -53,5 +53,38 @@ class DataBase():
 			sData.append(int(val[0]))
 		return sData
 
+	# Description: Get the date available in the DB
+	# Input: dataName: (str) the name of data base
+	# Output: sData: (int list 3D) the days, months and years available
+	def _getDate(self, nameDB):
+		date = [[],[],[]]
+		label = ["mois","annee"]
+		for j in range(0, len(label)):
+			tmp = []
+			index = self.listeLabel.index(label[j])
+			for i in range(0, len(self.data)):
+				val = self.data[i][index].split(".")
+				tmp.append(int(val[0]))
+			tmp = list(set(tmp))
+			date[j] = tmp
+		return date
+
+	# Description: Get the data in function of a date
+	# Input: dataName: (str) the name of data base
+	#					(str) the selected day
+	#					(str) the selected month
+	#					(str) the selected year
+	# Output: sData: (int list) the data of the asked label 
+	def _getDateData(self, dataName, month, year):
+		sData = []
+		index = self.listeLabel.index(dataName)
+		index_month = self.listeLabel.index("mois")
+		index_year = self.listeLabel.index("annee")
+		for i in range(0, len(self.data)):
+			if self.data[i][index_month] == month and self.data[i][index_year] == year:
+				val = self.data[i][index].split(".")
+				sData.append(int(val[0]))
+		return sData
+
 
 
