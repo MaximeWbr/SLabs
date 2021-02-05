@@ -9,18 +9,18 @@ class DataBase():
 		self.listeLabel = []
 		#Download all the dataBase
 		if(flag):
-			for i in range(0, len(listeURL)):
-				url = listeURL[i]
-				r = requests.get(url, allow_redirects=True)
-				open(listeName[i], 'wb').write(r.content)
+			#for i in range(0, len(listeURL)):
+			url = listeURL#[i]
+			r = requests.get(url, allow_redirects=True)
+			open(listeName, 'wb').write(r.content)
 
 	# Description: Get the data of the DB and save raw information into self.data (str list)
 	# Input: name: (str) the name of the data base
 	# Output: None
 	def _getData(self, name):
 		data = []
-		index = self.listeName.index(name)
-		with open(self.listeName[index], 'r') as csvfile:
+		#index = self.listeName.index(name)
+		with open(name, 'r') as csvfile:
 			reader = csv.reader(csvfile)
 			for row in reader:
 				data.append(row)
@@ -33,8 +33,8 @@ class DataBase():
 	# Output: None
 	def _getDataAIR(self, name):
 		data = []
-		index = self.listeName.index(name)
-		with open(self.listeName[index], 'r',encoding = "ISO-8859-1") as csvfile: #Change the encoding into "ISO-8859-1" for reading
+		#index = self.listeName.index(name)
+		with open(name, 'r',encoding = "ISO-8859-1") as csvfile: #Change the encoding into "ISO-8859-1" for reading
 			reader = csv.reader(csvfile)
 			for row in reader:
 				data.append(row)
@@ -49,7 +49,8 @@ class DataBase():
 		sData = []
 		index = self.listeLabel.index(dataName)
 		for i in range(0, len(self.data)):
-			sData.append(int(self.data[i][index]))
+			val = self.data[i][index].split(".")
+			sData.append(int(val[0]))
 		return sData
 
 

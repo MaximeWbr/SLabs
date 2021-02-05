@@ -40,30 +40,30 @@ def image():
 	# Check the value of sample number
 	if s_number < 0:
 		return render_template('paramSingleAlerte.html')
+	#Replace "temperature_partie_decimale" by "temperature" because doesn't have the same label name
+	if(city == "Toulouse_La_Salade" and label == "temperature_partie_decimale"):
+		label ="temperature_en_degre_c"
 
-	if city == "Toulouse":
-		output_dir = TOULOUSE_PATH_DB
-		urlList = TOULOUSE_URL_LIST
-		nameList = TOULOUSE_NAME_LSIT
-	else:
-		output_dir = AIR_PATH_DB
-		urlList = AIR_URL
-		nameList = AIR_NAME
+	nameIndex = NAME_INDEX.index(city)
+	output_dir = TOULOUSE_PATH_DB
+	urlList = TOULOUSE_URL_LIST[nameIndex]
+	nameList = TOULOUSE_NAME_LSIT[nameIndex]
+
 	# Create folder for data base
 	mkdir_p(output_dir)
 	# Check time to download the new DB or not, update every 15min (Weather DB)
 	yearTime = timedelta(days=365)
 	yearTime.total_seconds()
 	global TIME
-	if (yearTime.total_seconds() < TIME+(15*60)):
+	if (yearTime.total_seconds() < TIME[nameIndex]+(15*60)):
 		UPDATE_DB = 0
 	else:
 		UPDATE_DB = 1
-		TIME = yearTime.total_seconds()
+		TIME[nameIndex] = yearTime.total_seconds()
 	# Get the corresponding data bases
 	toulouseDB = DataBase(city, urlList, nameList,UPDATE_DB)
 	# Read the data bases
-	toulouseDB._getData(nameList[0])
+	toulouseDB._getData(nameList)
 	data = toulouseDB._getSpecificData(label) #temperature_partie_decimale
 	# Plot data
 	visu = Visualization()
@@ -84,24 +84,20 @@ def imageCompare():
 	# Check the value of sample number
 	if s_number < 0:
 		return render_template('paramCompareAlerte.html')
+	#Replace "temperature_partie_decimale" by "temperature" because doesn't have the same label name
+	if((city1 == "Toulouse_La_Salade" or city2 == "Toulouse_La_Salade") and label == "temperature_partie_decimale"):
+		label ="temperature_en_degre_c"
 
-	if city1 == "Toulouse":
-		output_dir1 = TOULOUSE_PATH_DB
-		urlList1 = TOULOUSE_URL_LIST
-		nameList1 = TOULOUSE_NAME_LSIT
-	else:
-		output_dir1 = AIR_PATH_DB
-		urlList1 = AIR_URL
-		nameList1 = AIR_NAME
+	nameIndex = NAME_INDEX.index(city1)
+	output_dir1 = TOULOUSE_PATH_DB
+	urlList1 = TOULOUSE_URL_LIST[nameIndex]
+	nameList1 = TOULOUSE_NAME_LSIT[nameIndex]
 
-	if city2 == "Toulouse":
-		output_dir2 = TOULOUSE_PATH_DB
-		urlList2 = TOULOUSE_URL_LIST
-		nameList2 = TOULOUSE_NAME_LSIT
-	else:
-		output_dir2 = AIR_PATH_DB
-		urlList2 = AIR_URL
-		nameList2 = AIR_NAME
+	nameIndex2 = NAME_INDEX.index(city2)
+	output_dir2 = TOULOUSE_PATH_DB
+	urlList2 = TOULOUSE_URL_LIST[nameIndex]
+	nameList2 = TOULOUSE_NAME_LSIT[nameIndex]
+
 	# Create folder for data base
 	mkdir_p(output_dir1)
 	mkdir_p(output_dir2)
@@ -109,17 +105,17 @@ def imageCompare():
 	yearTime = timedelta(days=365)
 	yearTime.total_seconds()
 	global TIME
-	if (yearTime.total_seconds() < TIME+(15*60)):
+	if (yearTime.total_seconds() < TIME[nameIndex]+(15*60)):
 		UPDATE_DB = 0
 	else:
 		UPDATE_DB = 1
-		TIME = yearTime.total_seconds()
+		TIME[nameIndex] = yearTime.total_seconds()
 	# Get the corresponding data bases
 	dataBase1 = DataBase(city1, urlList1, nameList1, UPDATE_DB)
 	dataBase2 = DataBase(city2, urlList2, nameList2, UPDATE_DB)
 	# Read the data bases
-	dataBase1._getData(nameList1[0])
-	dataBase2._getData(nameList2[0])
+	dataBase1._getData(nameList1)
+	dataBase2._getData(nameList2)
 	data = dataBase1._getSpecificData(label1)
 	data2 = dataBase2._getSpecificData(label2)
 	# Plot data
@@ -141,19 +137,19 @@ def imageAirCompare():
 	# Check the value of sample number
 	if s_number < 0:
 		return render_template('paramCompareAirQualityAlerte.html')
+	#Replace "temperature_partie_decimale" by "temperature" because doesn't have the same label name
+	if(city1 == "Toulouse_La_Salade" and label == "temperature_partie_decimale"):
+		label ="temperature_en_degre_c"
 
-	if city1 == "Toulouse":
-		output_dir1 = TOULOUSE_PATH_DB
-		urlList1 = TOULOUSE_URL_LIST
-		nameList1 = TOULOUSE_NAME_LSIT
-	else:
-		output_dir1 = AIR_PATH_DB
-		urlList1 = AIR_URL
-		nameList1 = AIR_NAME
+	nameIndex = NAME_INDEX.index(city1)
+	output_dir1 = TOULOUSE_PATH_DB
+	urlList1 = TOULOUSE_URL_LIST[nameIndex]
+	nameList1 = TOULOUSE_NAME_LSIT[nameIndex]
 
 	output_dir2 = AIR_PATH_DB
 	urlList2 = AIR_URL
 	nameList2 = AIR_NAME
+
 	# Create folder for data base
 	mkdir_p(output_dir1)
 	mkdir_p(output_dir2)
@@ -162,18 +158,18 @@ def imageAirCompare():
 	yearTime.total_seconds()
 	global TIME_AIR
 	global TIME
-	if ((yearTime.total_seconds() < TIME_AIR+(9*60)) or (yearTime.total_seconds() < TIME+(15*60))):
+	if ((yearTime.total_seconds() < TIME_AIR+(9*60)) or (yearTime.total_seconds() < TIME[nameIndex]+(15*60))):
 		UPDATE_DB = 0
 	else:
 		UPDATE_DB = 1
 		TIME_AIR = yearTime.total_seconds()
-		TIME = yearTime.total_seconds()
+		TIME[nameIndex] = yearTime.total_seconds()
 	# Get the corresponding data bases
 	dataBase1 = DataBase(city1, urlList1, nameList1, UPDATE_DB)
 	dataBase2 = DataBase(city2, urlList2, nameList2, UPDATE_DB)
 	# Read the data bases
-	dataBase1._getData(nameList1[0])
-	dataBase2._getDataAIR(nameList2[0])
+	dataBase1._getData(nameList1)
+	dataBase2._getDataAIR(nameList2)
 	data = dataBase1._getSpecificData(label1)
 	data2 = dataBase2._getSpecificData(label2)
 	# Plot data
