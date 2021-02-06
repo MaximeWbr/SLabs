@@ -9,15 +9,14 @@
 		</style>
 	</head>
 	<body>
-		<h1 id="header">Settings for a single plot of a weather data base</h1>
-		<form action = "http://localhost:5000/plot" method = "POST">
+		<h1 id="header">Settings for a single plot of a weather data base for a specific date</h1>
+		<form action = "http://localhost:5000/plotDate" method = "POST">
 
 		<label for="city-select">Choose your city:</label>
 		<select name="city" id="city">
 			<option value="">--Please choose an option--</option>
 			<option value="Toulouse_Tesco">Toulouse Tesco</option>
 			<option value="Toulouse_George_Sand">Toulouse George Sand</option>
-			<option value="Toulouse_La_Salade">Toulouse La Salade</option>
 		</select>
 
 		<p>Sample_number<input type = "text" name = "sample_number" /></p>
@@ -34,9 +33,33 @@
 			<option value="force_moyenne_du_vecteur_de_vent">Force moyenne du vecteur de vent</option>
 			<option value="force_du_vecteur_de_vent_max">force du vecteur de vent max</option>
 		</select>
+		<p></p>
+		<label for="month-select">Choose the month:</label>
+		<select name="month" id="month">
+			<option value="">--Please choose an option--</option>
+			<option value="1">Janvier</option>
+			<option value="2">Fevrier</option>
+			<option value="3">Mars</option>
+			<option value="4">Avril</option>
+			<option value="5">Mai</option>
+			<option value="6">Juin</option>
+			<option value="7">Juillet</option>
+			<option value="8">Aout</option>
+			<option value="9">Septembre</option>
+			<option value="10">Octobre</option>
+			<option value="11">Novembre</option>
+			<option value="12">Decembre</option>
+		</select>
+		<label for="year-select">Choose the year:</label>
+		<select name="year" id="year">
+			<option value="">--Please choose an option--</option>
+			<option value="2">2021</option>
+			<option value="1">2020</option>
+		</select> 
+		
 		<p><input type = "submit" value = "submit" /></p>
 		</form>
-
+		<p style="color: red;"> Error Date not available! Try an other one</p>
 		<form action = "http://localhost:5000/" method = "POST">
 			<p><input type = "submit" value = "Back" /></p>
 		</form>

@@ -22,7 +22,7 @@ class Visualization():
 			num = len(data)
 		#Get the num last values of data
 		for i in range(num):
-			tmpData.append(data[num-(i+1)])
+			tmpData.append(data[len(data)-num +i])
 		#Scale x
 		x = np.linspace(1,num,num)
 		plt.switch_backend('Agg') #matplotlib set the backend to a non-interactive one in order to the server does not try to create (and then destroy) GUI windows that will never be seen.
@@ -40,7 +40,7 @@ class Visualization():
 	#		 data2: (int list) the list of the second specific data
 	#		 num:   (int) number of element to plot
 	# Output: (str) the name of the figure
-	def _plotCompare(self, name1, data1, name2, data2, num):
+	def _plotCompare(self, name1, data1, name2, data2, num, city1, city2):
 		tmpData1 = []
 		tmpData2 = []
 		#Safety take the max of available data
@@ -50,8 +50,8 @@ class Visualization():
 			num = len(data2)
 		#Get the num last values of the data1 and data2
 		for i in range(num):
-			tmpData1.append(data1[num-(i+1)])
-			tmpData2.append(data2[num-(i+1)])
+			tmpData1.append(data1[len(data1)-num +i])
+			tmpData2.append(data2[len(data2)-num +i])
 		if max(tmpData1) != 0:
 			normData1 = [float(i)/max(tmpData1) for i in tmpData1]
 		else:
@@ -75,10 +75,10 @@ class Visualization():
 			plotName = "Air Quality"
 		else:
 			plotName = name2
-		plt.suptitle("Compare '"+ name1 +"' to '"+ plotName +"' for the "+ str(num) +" last times")
+		plt.suptitle(name1 +"' Vs '"+ plotName +"' for the "+ str(num) +" last times")
 		plt.ylabel("Normalized data")
 		plt.xlabel("The "+ str(num) +" last data received")
-		plt.legend((name1, plotName), loc='upper right')
+		plt.legend((city1, city2), loc='upper right')
 		plt.savefig(figureName)
 		return name1 + "_compare_to_" + name2 +".png"
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style type="text/css">
+			h1#header
+			{
+				color: rgb(61, 31, 228) ;
+			}
+		</style>
+	</head>
+	<head>
+		<title>Stack Labs Weather Page</title>
+	</head>
+	<body>
+		<h1 id="header">Single data plot for a specific date</h1>
+		<figure>
+			<img src=/static/images/{{ image_path }} alt="p">
+		</figure>
+		<form action = "http://localhost:5000/" method = "POST">
+			<p><input type = "submit" value = "Back" /></p>
+		</form>
+	</body>
+</html>
