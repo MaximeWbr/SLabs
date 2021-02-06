@@ -9,7 +9,7 @@
 		</style>
 	</head>
 	<body>
-		<h1 id="header">Settings for a single plot of a weather data base</h1>
+		<h1 id="header">Settings for a single plot of a weather data base for a specific date</h1>
 		<form action = "http://localhost:5000/plotDate" method = "POST">
 
 		<label for="city-select">Choose your city:</label>
@@ -24,7 +24,7 @@
 		<label for="data-select">Choose your data:</label>
 		<select name="data" id="label">
 			<option value="">--Please choose an option--</option>
-			<option value="temperature_partie_decimale">Temperature partie decimale</option>
+			<option value="temperature_partie_entiere">Temperature partie entiere</option>
 			<option value="pression">Pression</option>
 			<option value="humidite">Humidite</option>
 			<option value="pluie_en_augets">Pluie en augets</option>
@@ -33,7 +33,7 @@
 			<option value="force_moyenne_du_vecteur_de_vent">Force moyenne du vecteur de vent</option>
 			<option value="force_du_vecteur_de_vent_max">force du vecteur de vent max</option>
 		</select>
-
+		<p></p>
 		<label for="month-select">Choose the month:</label>
 		<select name="month" id="month">
 			<option value="">--Please choose an option--</option>

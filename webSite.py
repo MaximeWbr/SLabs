@@ -45,7 +45,7 @@ def image():
 	if s_number < 0:
 		return render_template('paramSingleAlerte.html')
 	#Replace "temperature_partie_decimale" by "temperature" because doesn't have the same label name
-	if(city == "Toulouse_La_Salade" and label == "temperature_partie_decimale"):
+	if(city == "Toulouse_La_Salade" and label == "temperature_partie_entiere"):
 		label ="temperature_en_degre_c"
 
 	nameIndex = NAME_INDEX.index(city)
@@ -69,11 +69,6 @@ def image():
 	# Read the data bases
 	toulouseDB._getData(nameList)
 	data = toulouseDB._getSpecificData(label) #temperature_partie_decimale
-	print("\n")
-	a = []
-	print(len(a))
-	toulouseDB._getDate(city)
-	print("\n")
 	# Plot data
 	visu = Visualization()
 	figName = visu._plotData(label, data, s_number)
@@ -94,7 +89,7 @@ def imageDate():
 	if s_number < 0:
 		return render_template('paramSingleDateAlerteSample.html')
 	#Replace "temperature_partie_decimale" by "temperature" because doesn't have the same label name
-	if(city == "Toulouse_La_Salade" and label == "temperature_partie_decimale"):
+	if(city == "Toulouse_La_Salade" and label == "temperature_partie_entiere"):
 		label ="temperature_en_degre_c"
 
 	nameIndex = NAME_INDEX.index(city)
@@ -121,7 +116,6 @@ def imageDate():
 	if len(data) == 0:
 		return render_template('paramSingleDateAlerte.html')
 	toulouseDB._getDate(city)
-	print("\n")
 	# Plot data
 	visu = Visualization()
 	figName = visu._plotData(label, data, s_number)
@@ -142,8 +136,10 @@ def imageCompare():
 	if s_number < 0:
 		return render_template('paramCompareAlerte.html')
 	#Replace "temperature_partie_decimale" by "temperature" because doesn't have the same label name
-	if((city1 == "Toulouse_La_Salade" or city2 == "Toulouse_La_Salade") and label == "temperature_partie_decimale"):
-		label ="temperature_en_degre_c"
+	if(city1 == "Toulouse_La_Salade" and label1 == "temperature_partie_entiere"):
+		label1 ="temperature_en_degre_c"
+	if(city2 == "Toulouse_La_Salade" and label2 == "temperature_partie_entiere"):
+		label2 ="temperature_en_degre_c"
 
 	nameIndex = NAME_INDEX.index(city1)
 	output_dir1 = TOULOUSE_PATH_DB
@@ -177,7 +173,7 @@ def imageCompare():
 	data2 = dataBase2._getSpecificData(label2)
 	# Plot data
 	visu = Visualization()
-	figName = visu._plotCompare(label1, data, label2, data2, s_number)
+	figName = visu._plotCompare(label1, data, label2, data2, s_number, city1, city2)
 	return render_template('plotCompare.html', image_path =figName)
 
 #The weather data and air quality compare page
@@ -195,8 +191,8 @@ def imageAirCompare():
 	if s_number < 0:
 		return render_template('paramCompareAirQualityAlerte.html')
 	#Replace "temperature_partie_decimale" by "temperature" because doesn't have the same label name
-	if(city1 == "Toulouse_La_Salade" and label == "temperature_partie_decimale"):
-		label ="temperature_en_degre_c"
+	if(city1 == "Toulouse_La_Salade" and label1 == "temperature_partie_entiere"):
+		label1 ="temperature_en_degre_c"
 
 	nameIndex = NAME_INDEX.index(city1)
 	output_dir1 = TOULOUSE_PATH_DB
@@ -231,7 +227,7 @@ def imageAirCompare():
 	data2 = dataBase2._getSpecificData(label2)
 	# Plot data
 	visu = Visualization()
-	figName = visu._plotCompare(label1, data, label2, data2, s_number)
+	figName = visu._plotCompare(label1, data, label2, data2, s_number, city1, city2)
 	return render_template('plotCompare.html', image_path =figName)
 
 if __name__ == "__main__":
