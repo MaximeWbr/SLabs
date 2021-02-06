@@ -1,77 +1,195 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<style type="text/css">
-			body
-			{
-				margin: 10px 0 ;
-				padding: 0 ;
-				text-align: center ;
-			}
-				
-			div#conteneur
-			{
-				width: 770px ;
-				margin: 0 auto ;
-				text-align: left ;
-			}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
 
-			h1#header
-			{
-				color: rgb(61, 31, 228) ;
-			}
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 180px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
 
-			p#contenu
-			{
-				border:1px dotted rgb(61, 31, 228);
-			}
-			
-			ul#menu
-			{
-				height: 150px ;
-				margin: 0 ;
-				padding: 0 ;
-				background: rgb(61, 31, 228);
-				list-style-type: none ;
-				text-align: center ;
-				display: block ;
-			}
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
 
-			p#footer
-			{
-				margin: 0 ;
-				padding-right: 10px ;
-				line-height: 30px ;
-				text-align: right ;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="conteneur"> 
-			<h1 id="header">Stack Labs Weather Page</h1>
-			<h1 >Home Page</h1>
-			<nav>
-				<ul id="menu">
-					<form action = "http://localhost:5000/paramSingle" method = "POST">
-						<p><input type = "submit" value = "Plot one single data" /></p>
-					</form>
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
 
-					<form action = "http://localhost:5000/paramSingleDate" method = "POST">
-						<p><input type = "submit" value = "Plot one single data for a specific day" /></p>
-					</form>
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+		* html #footer-wrapper {
+			float: left;
+			position: relative;
+			width: 100%;
+			padding-bottom: 10010px;
+			margin-bottom: -10000px;
+			background: #fff;
+		}
 
-					<form action = "http://localhost:5000/paramCompare" method = "POST">
-						<p><input type = "submit" value = "Plot and compare between weather stations" /></p>
-					</form>
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
 
-					<form action = "http://localhost:5000/paramCompareAirQuality" method = "POST">
-						<p><input type = "submit" value = "Plot and compare with Air Quality" /></p>
-					</form>
-				</ul>
-			</nav>
-			<h2>Description</h2>
-			<p id="contenu"> Through this application, it is possible to visualize a sample of data and compare them with the air quality or between them. Moreover it is possible to choose the data displayed by selecting the n last received data or a specific date. For this purpose we have several meteorological databases and a database of the region that records the air quality. </p>
-			<p id="footer">Made in HTML/CSS, Back end in Python3</p>
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: darkgreen;
+			text-decoration: none;
+		}
+
+		#header {
+			font-size: xx-large;
+			padding: 0.3em;
+			background: #b0c4de;
+		}
+
+		#footer {
+			font-size: large;
+			padding: 0.3em;
+			background: #b0c4de;
+		}
+
+		#left {
+			background: #f0f8ff;
+		}
+		
+		#right {
+			background: #f0f8ff;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#bold {
+			font-weight: bold;
+		}
+
+		#header2 {
+			font-size: x-large;
+			font-weight: bold;
+			color:#000000;
+		}
+
+		
+
+		#container .column {
+			padding-top: 1em;
+		}
+		div.image {
+			width:275px; /*width of your image*/
+   			height:75px; /*height of your image*/
+   			content:url(./static/images/slab.jpg);
+		}​
+	</style>
+
+</head>
+
+<body>
+
+	<header id="header"><div class="image"></div></header>
+
+	<div id="container">
+
+		<main id="center" class="column">
+			<h2 id="header">Weather data visualization</h2>
+				<p id="header2" >Description</p>
+					<p id="contenu"> Through this application, it is possible to visualize a sample of data and compare them with the air quality or between them. Moreover it is possible to choose the data displayed by selecting the n last received data or a specific date. For this purpose we have several meteorological databases and a database of the region that records the air quality. </p>	
+				<nav>
+					<p id="header2"  >Visualisation</p>
+					<ul id="menu">
+						<p id="bold">Visualization of the last received weather data for one specific station.</p>
+						<form action = "http://localhost:5000/paramSingle" method = "POST">
+							<p><input type = "submit" value = "Plot one single data" /></p>
+						</form>
+						<p id="bold">Visualization of one month weather data for one specific station.</p>
+						<form action = "http://localhost:5000/paramSingleDate" method = "POST">
+							<p><input type = "submit" value = "Plot one single data for a specific month" /></p>
+						</form>
+						<p id="bold">Comparison of the last received weather data between two specific stations.</p>
+						<form action = "http://localhost:5000/paramCompare" method = "POST">
+							<p><input type = "submit" value = "Plot and compare between weather stations" /></p>
+						</form>
+						<p id="bold">Comparison of the last received weather data with the air quality for one specific stations.</p>
+						<form action = "http://localhost:5000/paramCompareAirQuality" method = "POST">
+							<p><input type = "submit" value = "Plot and compare with Air Quality" /></p>
+						</form>
+					</ul>
+				</nav>							
+		</main>
+
+		<div id="left" class="column">
+			<h3>Toulouse Weather station available</h3>
+			<ul>
+				<li><p> Toulouse Tesco </p></li>
+				<li><p> Toulouse George_Sand </p></li>
+				<li><p> Toulouse La Salade </p></li>
+			</ul>
+			<h3>Toulouse Air Quality</h3>
 		</div>
-	</body>
+
+		<div id="right" class="column">
+		</div>
+	</div>
+
+	<div id="footer-wrapper">
+		<footer id="footer"><p>Made in HTML/CSS, Back end in Python3. Maxime Weber</p></footer>
+	</div>
+
+</body>
 </html>
