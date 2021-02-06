@@ -15,19 +15,22 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def home():
 	return render_template('param.html')
 
-
+#Parameter page to plot one sigle data
 @app.route("/paramSingle", methods=['POST', 'GET'])
 def single():
 	return render_template('paramSingle.html')
 
+#Parameter page to plot one sigle data for a specific date
 @app.route("/paramSingleDate", methods=['POST', 'GET'])
 def singleDate():
 	return render_template('paramSingleDate.html')
 
+#Parameter page to plot one sigle data
 @app.route("/paramCompare", methods=['POST', 'GET'])
 def Compare():
 	return render_template('paramCompare.html')
 
+#Parameter page to plot selected data compare to air quality
 @app.route("/paramCompareAirQuality", methods=['POST', 'GET'])
 def AirCompare():
 	return render_template('paramCompareAirQuality.html')
@@ -35,23 +38,27 @@ def AirCompare():
 #Single Plot page
 @app.route('/plot', methods=['POST', 'GET'])
 def image():
+	#Get information from the param single page
 	if request.method == 'POST':
 		result = request.form
 		city = request.form["city"]
 		label = request.form["data"]
 		s_number = int(request.form["sample_number"])
 
-	# Check the value of sample number
+	#Check the value of sample number
 	if s_number < 0:
 		return render_template('paramSingleAlerte.html')
+
 	#Replace "temperature_partie_decimale" by "temperature" because doesn't have the same label name
 	if(city == "Toulouse_La_Salade" and label == "temperature_partie_entiere"):
 		label ="temperature_en_degre_c"
 
+	#Get the number index of the selected city
 	nameIndex = NAME_INDEX.index(city)
+	#Set information of the DB
 	output_dir = TOULOUSE_PATH_DB
-	urlList = TOULOUSE_URL_LIST[nameIndex]
-	nameList = TOULOUSE_NAME_LSIT[nameIndex]
+	url = TOULOUSE_URL_LIST[nameIndex]
+	name = TOULOUSE_NAME_LIST[nameIndex]
 
 	# Create folder for data base
 	mkdir_p(output_dir)
@@ -65,18 +72,20 @@ def image():
 		UPDATE_DB = 1
 		TIME[nameIndex] = yearTime.total_seconds()
 	# Get the corresponding data bases
-	toulouseDB = DataBase(city, urlList, nameList,UPDATE_DB)
+	toulouseDB = DataBase(url, name, UPDATE_DB)
 	# Read the data bases
-	toulouseDB._getData(nameList)
-	data = toulouseDB._getSpecificData(label) #temperature_partie_decimale
+	toulouseDB._getData(name)
+	data = toulouseDB._getSpecificData(label)
 	# Plot data
 	visu = Visualization()
 	figName = visu._plotData(label, data, s_number)
+	#Go the the plot html page
 	return render_template('plot.html', image_path =figName)
 
-#Single Plot page
+#Single Plot page for a selected date
 @app.route('/plotDate', methods=['POST', 'GET'])
 def imageDate():
+	#Get information from the html param page (paramSingleDate)
 	if request.method == 'POST':
 		result = request.form
 		city = request.form["city"]
@@ -92,10 +101,11 @@ def imageDate():
 	if(city == "Toulouse_La_Salade" and label == "temperature_partie_entiere"):
 		label ="temperature_en_degre_c"
 
+	#Get the number index of the selected city
 	nameIndex = NAME_INDEX.index(city)
 	output_dir = TOULOUSE_PATH_DB
-	urlList = TOULOUSE_URL_LIST[nameIndex]
-	nameList = TOULOUSE_NAME_LSIT[nameIndex]
+	url = TOULOUSE_URL_LIST[nameIndex]
+	name = TOULOUSE_NAME_LIST[nameIndex]
 
 	# Create folder for data base
 	mkdir_p(output_dir)
@@ -109,13 +119,13 @@ def imageDate():
 		UPDATE_DB = 1
 		TIME[nameIndex] = yearTime.total_seconds()
 	# Get the corresponding data bases
-	toulouseDB = DataBase(city, urlList, nameList,UPDATE_DB)
+	toulouseDB = DataBase(url, name,UPDATE_DB)
 	# Read the data bases
-	toulouseDB._getData(nameList)
+	toulouseDB._getData(name)
 	data = toulouseDB._getDateData(label, month, year)
 	if len(data) == 0:
 		return render_template('paramSingleDateAlerte.html')
-	toulouseDB._getDate(city)
+	toulouseDB._getDate()
 	# Plot data
 	visu = Visualization()
 	figName = visu._plotData(label, data, s_number)
@@ -124,6 +134,7 @@ def imageDate():
 #Compare Plot page
 @app.route('/plotCompare', methods=['POST', 'GET'])
 def imageCompare():
+	#Get information from the html param page (paramCompare)
 	if request.method == 'POST':
 		result = request.form
 		city1 = request.form["city"]
@@ -141,15 +152,16 @@ def imageCompare():
 	if(city2 == "Toulouse_La_Salade" and label2 == "temperature_partie_entiere"):
 		label2 ="temperature_en_degre_c"
 
+	#Get the number index of the selected city and set information
 	nameIndex = NAME_INDEX.index(city1)
 	output_dir1 = TOULOUSE_PATH_DB
-	urlList1 = TOULOUSE_URL_LIST[nameIndex]
-	nameList1 = TOULOUSE_NAME_LSIT[nameIndex]
+	url1 = TOULOUSE_URL_LIST[nameIndex]
+	name1 = TOULOUSE_NAME_LIST[nameIndex]
 
 	nameIndex2 = NAME_INDEX.index(city2)
 	output_dir2 = TOULOUSE_PATH_DB
-	urlList2 = TOULOUSE_URL_LIST[nameIndex]
-	nameList2 = TOULOUSE_NAME_LSIT[nameIndex]
+	url2 = TOULOUSE_URL_LIST[nameIndex2]
+	name2 = TOULOUSE_NAME_LIST[nameIndex2]
 
 	# Create folder for data base
 	mkdir_p(output_dir1)
@@ -164,11 +176,11 @@ def imageCompare():
 		UPDATE_DB = 1
 		TIME[nameIndex] = yearTime.total_seconds()
 	# Get the corresponding data bases
-	dataBase1 = DataBase(city1, urlList1, nameList1, UPDATE_DB)
-	dataBase2 = DataBase(city2, urlList2, nameList2, UPDATE_DB)
+	dataBase1 = DataBase(url1, name1, UPDATE_DB)
+	dataBase2 = DataBase(url2, name2, UPDATE_DB)
 	# Read the data bases
-	dataBase1._getData(nameList1)
-	dataBase2._getData(nameList2)
+	dataBase1._getData(name1)
+	dataBase2._getData(name2)
 	data = dataBase1._getSpecificData(label1)
 	data2 = dataBase2._getSpecificData(label2)
 	# Plot data
@@ -179,6 +191,7 @@ def imageCompare():
 #The weather data and air quality compare page
 @app.route('/plotCompareAirQuality', methods=['POST', 'GET'])
 def imageAirCompare():
+	#Get information from the html param page (paramComapreAirQuality)
 	if request.method == 'POST':
 		result = request.form
 		city1 = request.form["city"]
@@ -194,14 +207,15 @@ def imageAirCompare():
 	if(city1 == "Toulouse_La_Salade" and label1 == "temperature_partie_entiere"):
 		label1 ="temperature_en_degre_c"
 
+	#Get the number index of the selected city and set information
 	nameIndex = NAME_INDEX.index(city1)
 	output_dir1 = TOULOUSE_PATH_DB
-	urlList1 = TOULOUSE_URL_LIST[nameIndex]
-	nameList1 = TOULOUSE_NAME_LSIT[nameIndex]
-
+	url1 = TOULOUSE_URL_LIST[nameIndex]
+	name1 = TOULOUSE_NAME_LIST[nameIndex]
+	#Set the inforamtion for the Air quality data base
 	output_dir2 = AIR_PATH_DB
-	urlList2 = AIR_URL
-	nameList2 = AIR_NAME
+	url2 = AIR_URL
+	name2 = AIR_NAME
 
 	# Create folder for data base
 	mkdir_p(output_dir1)
@@ -218,11 +232,11 @@ def imageAirCompare():
 		TIME_AIR = yearTime.total_seconds()
 		TIME[nameIndex] = yearTime.total_seconds()
 	# Get the corresponding data bases
-	dataBase1 = DataBase(city1, urlList1, nameList1, UPDATE_DB)
-	dataBase2 = DataBase(city2, urlList2, nameList2, UPDATE_DB)
+	dataBase1 = DataBase(url1, name1, UPDATE_DB)
+	dataBase2 = DataBase(url2, name2, UPDATE_DB)
 	# Read the data bases
-	dataBase1._getData(nameList1)
-	dataBase2._getDataAIR(nameList2)
+	dataBase1._getData(name1)
+	dataBase2._getDataAIR(name2)
 	data = dataBase1._getSpecificData(label1)
 	data2 = dataBase2._getSpecificData(label2)
 	# Plot data

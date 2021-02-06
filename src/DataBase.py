@@ -2,25 +2,25 @@ import requests
 import csv
 
 class DataBase():
-
-	def __init__(self, name, listeURL, listeName, flag):
+	#Description: Constuctor
+	# Input: url: (str) the url of the database for download
+	#		pathName: (str) Path, name and extension to save data base
+	#		flag: (int) 1 = download or update data base else no
+	def __init__(self, url, pathName, flag):
 		self.data = []
-		self.listeName = listeName
+		self.listeName = pathName
 		self.listeLabel = []
 		#Download all the dataBase
 		if(flag):
-			#for i in range(0, len(listeURL)):
-			url = listeURL#[i]
 			r = requests.get(url, allow_redirects=True)
-			open(listeName, 'wb').write(r.content)
+			open(pathName, 'wb').write(r.content)
 
 	# Description: Get the data of the DB and save raw information into self.data (str list)
-	# Input: name: (str) the name of the data base
+	# Input: pathName: (str) Path, name and extension to save data base
 	# Output: None
-	def _getData(self, name):
+	def _getData(self, pathName):
 		data = []
-		#index = self.listeName.index(name)
-		with open(name, 'r') as csvfile:
+		with open(pathName, 'r') as csvfile:
 			reader = csv.reader(csvfile)
 			for row in reader:
 				data.append(row)
@@ -28,13 +28,12 @@ class DataBase():
 			for i in range(1, len(data)):
 				self.data.append(data[i][0].split(";"))
 
-	# Description: Get the data of the DB and save raw information into self.data (str list)
-	# Input: name: (str) the name of the data base
+	# Description: Get the data of the Air quality DB and save raw information into self.data (str list)
+	# Input: pathName: (str) Path, name and extension to save data base
 	# Output: None
-	def _getDataAIR(self, name):
+	def _getDataAIR(self, pathName):
 		data = []
-		#index = self.listeName.index(name)
-		with open(name, 'r',encoding = "ISO-8859-1") as csvfile: #Change the encoding into "ISO-8859-1" for reading
+		with open(pathName, 'r',encoding = "ISO-8859-1") as csvfile: #Change the encoding into "ISO-8859-1" for reading
 			reader = csv.reader(csvfile)
 			for row in reader:
 				data.append(row)
@@ -54,9 +53,9 @@ class DataBase():
 		return sData
 
 	# Description: Get the date available in the DB
-	# Input: dataName: (str) the name of data base
+	# Input: dataName: None
 	# Output: sData: (int list 3D) the days, months and years available
-	def _getDate(self, nameDB):
+	def _getDate(self):
 		date = [[],[],[]]
 		label = ["mois","annee"]
 		for j in range(0, len(label)):
@@ -70,7 +69,7 @@ class DataBase():
 		return date
 
 	# Description: Get the data in function of a date
-	# Input: dataName: (str) the name of data base
+	# Input: dataName: (str) the name of data label
 	#					(str) the selected day
 	#					(str) the selected month
 	#					(str) the selected year

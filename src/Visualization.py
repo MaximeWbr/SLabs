@@ -23,7 +23,7 @@ class Visualization():
 		#Get the num last values of data
 		for i in range(num):
 			tmpData.append(data[len(data)-num +i])
-		#Scale x
+		#Plot figure
 		x = np.linspace(1,num,num)
 		plt.switch_backend('Agg') #matplotlib set the backend to a non-interactive one in order to the server does not try to create (and then destroy) GUI windows that will never be seen.
 		plt.plot(x,tmpData)
@@ -33,7 +33,7 @@ class Visualization():
 		plt.savefig(figureName)
 		return name+".png"
 
-	# Description: Plot two datas to compare them on the same plot
+	# Description: Plot two data set to compare them on the same plot
 	# Input: name1: (str) the first label name of the data
 	#		 data1: (int list) the list of the first specific data
 	#		 name2: (str) the second label name of the data
@@ -68,7 +68,7 @@ class Visualization():
 		#Create path for figure
 		output_dir = TOULOUSE_PATH_GRAPH 
 		mkdir_p(output_dir)
-		#Save the figure
+		#Plot the figure
 		label =name1 + "_compare_to_" + name2
 		figureName = output_dir+label+".png"
 		if name2 == "valeur":
