@@ -2,10 +2,10 @@ import requests
 import csv
 
 class DataBase():
-	#Description: Constuctor
+	# Description: Constructor
 	# Input: url: (str) the url of the database for download
-	#		pathName: (str) Path, name and extension to save data base
-	#		flag: (int) 1 = download or update data base else no
+	#		 pathName: (str) Path, name and extension to save data base
+	#		 flag: (int) 1 = download or update data base else no
 	def __init__(self, url, pathName, flag):
 		self.data = []
 		self.listeName = pathName
@@ -70,9 +70,8 @@ class DataBase():
 
 	# Description: Get the data in function of a date
 	# Input: dataName: (str) the name of data label
-	#					(str) the selected day
-	#					(str) the selected month
-	#					(str) the selected year
+	#		 month: (str) the selected month
+	#		 year : (str) the selected year
 	# Output: sData: (int list) the data of the asked label 
 	def _getDateData(self, dataName, month, year):
 		sData = []
